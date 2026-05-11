@@ -1,0 +1,11 @@
+gradio
+transformers
+torch
+deepface
+tf-keras
+opencv-python
+pandas
+numpy
+pillow
+accelerate
+sentencepiece
