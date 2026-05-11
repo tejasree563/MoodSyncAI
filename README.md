@@ -103,26 +103,50 @@ The application generates a human-readable emotional interpretation summarising:
 
 ## System Workflow
 
+## System Workflow
 
-User Input
-   │
-   ├── Image → DeepFace → Visual Emotion Scores
-   │
-   ├── Text → RoBERTa → Text Emotion Scores
-   │
-   ├── Audio → Whisper → Transcript
-   │                     │
-   │                     └── RoBERTa → Text Emotion
-   │                                    
-   │
-   └── Fusion Layer
-            │
-            ├── Alignment Detection
-            │
-            └── Generative Summary
-                      │
+```text
+                 ┌─────────────────────┐
+                 │     User Input      │
+                 │ Image • Text • Audio│
+                 └──────────┬──────────┘
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+        ▼                   ▼                   ▼
+
+┌────────────────┐  ┌────────────────┐  ┌────────────────┐
+│    DeepFace    │  │    RoBERTa     │  │    Whisper     │
+│ Facial Emotion │  │  Text Emotion  │  │ Speech-to-Text │
+└───────┬────────┘  └───────┬────────┘  └───────┬────────┘
+        │                   │                   │
+        ▼                   ▼                   ▼
+
+┌────────────────┐  ┌────────────────┐  ┌────────────────┐
+│ Visual Scores  │  │  Text Scores   │  │   Transcript   │
+└───────┬────────┘  └───────┬────────┘  └───────┬────────┘
+        └──────────────┬────┴──────────────┬────┘
+                       ▼                  
+
+              ┌──────────────────┐
+              │   Fusion Module  │
+              │ Weighted Fusion  │
+              └────────┬─────────┘
+                       │
+          ┌────────────┴────────────┐
+          ▼                         ▼
+
+┌──────────────────┐     ┌──────────────────┐
+│ Alignment Check  │     │ Summary Generator│
+└────────┬─────────┘     └────────┬─────────┘
+         └────────────┬───────────┘
                       ▼
-              Interactive Gradio UI
+
+           ┌────────────────────┐
+           │   Gradio UI Output │
+           │ Graphs • Metrics   │
+           └────────────────────┘
+```
 
 
 ---
@@ -385,6 +409,10 @@ This project demonstrates practical experience in:
 * AI Application Deployment
 
 ---
+# Screenshots
+
+![alt text](image.png)
+![alt text](image-1.png)
 
 # Repository Structure
 
