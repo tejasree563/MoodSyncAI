@@ -103,8 +103,6 @@ The application generates a human-readable emotional interpretation summarising:
 
 ## System Workflow
 
-## System Workflow
-
 ```text
                  ┌─────────────────────┐
                  │     User Input      │
